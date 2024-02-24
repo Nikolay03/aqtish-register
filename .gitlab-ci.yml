@@ -1,0 +1,22 @@
+before_script:
+    - 'export SOURCE_DIR=`pwd`'
+    - 'export PROJECT_DIR=/web/yumecs-client'
+
+stages:
+    - production
+
+production:
+    stage: production
+    script:
+        - 'rm -rf ~/yumecs_client_${CI_BUILD_REF_NAME}'
+        - 'mkdir ~/yumecs_client_${CI_BUILD_REF_NAME}'
+        - 'cp -R ${SOURCE_DIR}/* ~/yumecs_client_${CI_BUILD_REF_NAME}'
+        - 'cp -R ~/yumecs_client_${CI_BUILD_REF_NAME}/* ${PROJECT_DIR}/'
+        - 'cd ${PROJECT_DIR}'
+        - 'yarn install'
+        - 'yarn build'
+        - 'supervisorctl restart ui'
+    tags:
+        - yumecs
+    only:
+        - main

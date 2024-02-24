@@ -1,0 +1,5 @@
+export { default as DetailLayout } from './DetailLayout'
+export { default as HomeLayout } from './HomeLayout'
+export { default as PageLayout } from './PageLayout'
+export { default as SimpleLayout } from './SimpleLayout'
+export { default as AccountLayout } from './AccountLayout'
